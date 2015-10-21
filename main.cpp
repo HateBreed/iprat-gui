@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include "identificationcreator.h"
-#include <stdio.h>
+#include <QDebug>
 #include "actor.h"
 
 int main(int argc, char *argv[])
@@ -10,7 +10,21 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    Actor actor("test");
+    QList<Actor*> actors;
+    for(int i = 0; i < 10; i++)
+    {
+        Actor* actor;
+        actor = new Actor("test");
+        actors.append(actor);
+    }
+
+    QListIterator<Actor*> iter(actors);
+    while(iter.hasNext())
+    {
+        Actor* a = iter.next();
+        qDebug() << "Actor" << a->getId() << " named \"" << a->getDescription() << "\".";
+    }
+
 
     return a.exec();
 }

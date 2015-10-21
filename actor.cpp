@@ -12,6 +12,11 @@ void Actor::setDescription(const QString &value)
     description = QString(value);
 }
 
+qint16 Actor::getId() const
+{
+    return id;
+}
+
 Actor::Actor()
 {
     id = identificationCreator::getInstance()->getNextActorId();
@@ -19,6 +24,13 @@ Actor::Actor()
 
 Actor::Actor(const QString &name)
 {
+    id = identificationCreator::getInstance()->getNextActorId();
+    description = QString(name);
+}
+
+Actor::Actor(const char *&name)
+{
+    id = identificationCreator::getInstance()->getNextActorId();
     description = QString(name);
 }
 

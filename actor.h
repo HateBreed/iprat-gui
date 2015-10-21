@@ -23,6 +23,7 @@ private:
 public:
 
     Actor(const QString &name);
+    Actor(const char* &name);
     Actor(const QList<Information*> _informations,
           const QList<Connection*> _connections,
           const QList<Task*> _tasks,
@@ -49,6 +50,8 @@ public:
 
     const QString getDescription() const;
     void setDescription(const QString &value);
+
+    qint16 getId() const;
 
 signals:
 

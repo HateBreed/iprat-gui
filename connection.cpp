@@ -64,6 +64,7 @@ Connection::Connection(const Connection::connectionType &value,
                        const qint16 &start,
                        const qint16 &end)
 {
+    id = identificationCreator::getInstance()->getNextConnectionId();
     type = value;
     actorStart = start;
     actorEnd = end;
