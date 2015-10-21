@@ -11,10 +11,14 @@ int main(int argc, char *argv[])
     w.show();
 
     QList<Actor*> actors;
+    Actor* actor;
     for(int i = 0; i < 10; i++)
     {
-        Actor* actor;
         actor = new Actor("test");
+        actor->addTask(new Task(Task::controlling));
+        actor->addTask(new Task(Task::source));
+        actor->addFunction(new Function("Something",Function::ADMINISTRATION));
+        actor->addFunction(new Function("Something",Function::MEASUREMENT));
         actors.append(actor);
     }
 
@@ -23,6 +27,8 @@ int main(int argc, char *argv[])
     {
         Actor* a = iter.next();
         qDebug() << "Actor" << a->getId() << " named \"" << a->getDescription() << "\".";
+        qDebug() << "With " << a->getTaskCount() << " tasks, " << a->getFunctionCount() << " functions, " << a->getConnectionCount()
+                 << " connections.";
     }
 
 

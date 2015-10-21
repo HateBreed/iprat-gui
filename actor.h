@@ -30,20 +30,20 @@ public:
           const QList<Function*> _functions);
 
 
-    void addInformation(Information &information);
+    void addInformation(Information* information);
     const Information* getInformation(const QString &name);
     const Information* getInformation(const qint16 &id);
     int getInformationCount();
 
-    void addConnection(Connection &connection);
+    void addConnection(Connection* connection);
     const QList<Connection*> getConnections(enum Connection::connectionType);
     int getConnectionCount();
 
-    void addTask(Task  &task);
+    void addTask(Task* task);
     const Task* getTask(const QString name);
     int getTaskCount();
 
-    void addFunction(Function &function);
+    void addFunction(Function* function);
     const Function* getFunction(const QString name);
     int getFunctionCount();
 

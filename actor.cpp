@@ -39,15 +39,16 @@ Actor::Actor(const QList<Information*> _informations,
              const QList<Task*> _tasks,
              const QList<Function*> _functions)
 {
+    id = identificationCreator::getInstance()->getNextActorId();
     informations = QList<Information*>(_informations);
     connections = QList<Connection*>(_connections);
     tasks = QList<Task*>(_tasks);
     functions = QList<Function*>(_functions);
 }
 
-void Actor::addInformation(Information &information)
+void Actor::addInformation(Information* information)
 {
-    informations.append(&information);
+    informations.append(information);
 }
 
 const Information* Actor::getInformation(const QString &name)
@@ -87,9 +88,9 @@ int Actor::getInformationCount()
     return informations.size();
 }
 
-void Actor::addConnection(Connection &connection)
+void Actor::addConnection(Connection* connection)
 {
-    connections.append(&connection);
+    connections.append(connection);
 }
 
 const QList<Connection*> Actor::getConnections(enum Connection::connectionType type)
@@ -114,9 +115,9 @@ int Actor::getConnectionCount()
     return connections.size();
 }
 
-void Actor::addTask(Task &task)
+void Actor::addTask(Task* task)
 {
-    tasks.append(&task);
+    tasks.append(task);
 }
 
 const Task* Actor::getTask(const QString name)
@@ -140,9 +141,9 @@ int Actor::getTaskCount()
     return tasks.size();
 }
 
-void Actor::addFunction(Function &function)
+void Actor::addFunction(Function* function)
 {
-    functions.append(&function);
+    functions.append(function);
 }
 
 const Function* Actor::getFunction(const QString name)
