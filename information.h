@@ -12,6 +12,7 @@ class Information : public QObject
 private:
     int multiplicity;
     QString description;
+    qint16 id;
 
 public:
     enum informationIdentifiability{identifiable,identified,nonidentifiable};
@@ -23,6 +24,11 @@ public:
                 const int multiplicity);
 
 
+
+    QString getDescription() const;
+    void setDescription(const QString &value);
+
+    qint16 getId() const;
 
 signals:
 

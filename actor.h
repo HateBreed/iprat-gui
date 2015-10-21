@@ -14,39 +14,40 @@ class Actor : public QObject
 private:
     QString description;
     qint16 id; //unique
-    QList<Information> informations;
-    QList<Connection> connections;
-    QList<Task> tasks;
-    QList<Function> functions;
-
+    QList<Information*> informations;
+    QList<Connection*> connections;
+    QList<Task*> tasks;
+    QList<Function*> functions;
+    Actor();
 
 public:
-    Actor();
+
     Actor(const QString &name);
-    Actor(const QList<Information> _informations,
-          const QList<Connection> _connections,
-          const QList<Task> _tasks,
-          const QList<Function> _functions);
+    Actor(const QList<Information*> _informations,
+          const QList<Connection*> _connections,
+          const QList<Task*> _tasks,
+          const QList<Function*> _functions);
 
 
     void addInformation(Information &information);
-    Information getInformation(const QString &name);
+    const Information* getInformation(const QString &name);
+    const Information* getInformation(const qint16 &id);
     int getInformationCount();
 
     void addConnection(Connection &connection);
-    Connection getConnection(const QString name);
+    const QList<Connection*> getConnections(enum Connection::connectionType);
     int getConnectionCount();
 
     void addTask(Task  &task);
-    Task getTask(const QString name);
+    const Task* getTask(const QString name);
     int getTaskCount();
 
     void addFunction(Function &function);
-    Function getFunction(const QString name);
+    const Function* getFunction(const QString name);
     int getFunctionCount();
 
 
-    QString getDescription() const;
+    const QString getDescription() const;
     void setDescription(const QString &value);
 
 signals:

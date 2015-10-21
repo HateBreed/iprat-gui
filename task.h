@@ -13,9 +13,12 @@ private:
     int multiplicity;
     QList<Information> datalist;
     QString description;
-public:
-    enum type{controlling,source,reading,processing,storing,lowaccess,highaccess};
     Task();
+
+public:
+    enum taskType{controlling,source,reading,processing,storing,lowaccess,highaccess};
+    taskType type;
+    Task(const enum taskType &abstractType);
 
     QString getDescription() const;
     void setDescription(const QString &value);
@@ -23,8 +26,8 @@ public:
     int getMultiplicity() const;
     void setMultiplicity(int value);
 
-    type getType() const;
-    void setType(enum type);
+    taskType getType() const;
+    void setType(enum taskType);
 
     QList<Information> addInformation(Information &_info);
 

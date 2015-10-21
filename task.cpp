@@ -20,8 +20,8 @@ void Task::setMultiplicity(int value)
     multiplicity = value;
 }
 
-Task::Task()
+Task::Task(const taskType &abstractType)
 {
-    
+    type = abstractType;
 }
 
