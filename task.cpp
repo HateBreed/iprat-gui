@@ -1,4 +1,6 @@
+#include <QDebug>
 #include "task.h"
+#include "utilities.h"
 
 int Task::getMultiplicity() const
 {
@@ -17,7 +19,7 @@ Task::taskType Task::getType() const
 
 bool Task::setType(const Task::taskType &abstractType)
 {
-    if(!isValidType(abstractType)) return false;
+    if(!Utilities::isValidTaskType(abstractType)) return false;
 
     iId = (int)abstractType;
     return true;
@@ -25,7 +27,7 @@ bool Task::setType(const Task::taskType &abstractType)
 
 QString Task::getTypeString() const
 {
-    return transferTypetoString(getType());
+    return Utilities::transferTaskTypetoString(getType());
 }
 
 bool Task::addInformation(Information *information)
@@ -38,12 +40,14 @@ bool Task::addInformation(Information *information)
 Task::Task(const Task::taskType &abstractType)
 {
     iId = abstractType;
+    qDebug() << "Task Id = " << getType() << "\"" << getTypeString() << "\"";
 }
 
 Task::Task(const QString &taskDescription, const Task::taskType &abstractType)
 {
     iDescription = QString(taskDescription);
     iId = abstractType;
+
 }
 
 Task::Task(ComponentBase *parent) :
@@ -61,42 +65,5 @@ bool Task::searchFromList(const Information *information)
         if(i->getDescription() == information->getDescription()) return true;
     }
     return false;
-}
-
-bool Task::isValidType(const Task::taskType &type)
-{
-    // True, when string is not empty, false other
-    return !transferTypetoString(type).isEmpty();
-}
-
-QString Task::transferTypetoString(Task::taskType type) const
-{
-    QString string;
-    switch(type) {
-    case controlling:
-        string = QString("Controlling");
-        break;
-    case source:
-        string = QString("Source");
-        break;
-    case reading:
-        string = QString("Reading");
-        break;
-    case processing:
-        string = QString("Processing");
-        break;
-    case storing:
-        string = QString("Storing");
-        break;
-    case lowaccess:
-        string = QString("Low level accessing");
-        break;
-    case highaccess:
-        string = QString("High level accessing");
-        break;
-    default:
-        string = QString("");
-    }
-    return string;
 }
 

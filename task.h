@@ -31,9 +31,6 @@ public:
     Task(const Task::taskType &abstractType);
     Task(const QString &taskDescription, const Task::taskType &abstractType);
 
-    bool isValidType(const Task::taskType &type);
-    QString transferTypetoString(Task::taskType type) const;
-
     int getMultiplicity() const;
     void setMultiplicity(int value);
 

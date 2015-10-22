@@ -28,7 +28,8 @@ public:
     Function(const QString &functionDescription, const functionType &value);
 
     Function::functionType getType() const;
-    void setType(const functionType &value);
+
+    bool setType(const functionType &value);
 
     QString getTypeString() const;
 
