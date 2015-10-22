@@ -7,7 +7,7 @@ int Task::getMultiplicity() const
     return iMultiplicity;
 }
 
-void Task::setMultiplicity(int value)
+void Task::setMultiplicity(int &value)
 {
     iMultiplicity = value;
 }

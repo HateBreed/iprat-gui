@@ -32,9 +32,9 @@ public:
     informationType iType;
 
     Information(const QString &name,
-                informationType type,
-                informationIdentifiability identifiability,
-                const int multiplicity);
+                informationType &type,
+                informationIdentifiability &identifiability,
+                const int &multiplicity);
 
 signals:
 

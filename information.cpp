@@ -8,7 +8,7 @@ Information::Information(ComponentBase *parent) :
 
 }
 
-Information::Information(const QString &name, Information::informationType type, Information::informationIdentifiability identifiability, const int multiplicity)
+Information::Information(const QString &name, Information::informationType &type, Information::informationIdentifiability &identifiability, const int &multiplicity)
 {
     iId = identificationCreator::getInstance()->getNextInformationId();
     iDescription = QString(name);

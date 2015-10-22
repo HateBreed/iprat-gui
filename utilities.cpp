@@ -7,13 +7,13 @@ Utilities::Utilities(QObject *parent) : QObject(parent)
 
 }
 
-bool Utilities::isValidTaskType(const Task::taskType type)
+bool Utilities::isValidTaskType(const Task::taskType &type)
 {
     // True, when string is not empty, false other
     return !Utilities::transferTaskTypetoString(type).isEmpty();
 }
 
-QString Utilities::transferTaskTypetoString(Task::taskType type)
+QString Utilities::transferTaskTypetoString(const Task::taskType &type)
 {
     QString string;
     switch(type) {
@@ -44,12 +44,12 @@ QString Utilities::transferTaskTypetoString(Task::taskType type)
     return string;
 }
 
-bool Utilities::isValidFunctionType(const Function::functionType type)
+bool Utilities::isValidFunctionType(const Function::functionType &type)
 {
     return !Utilities::transferFunctionTypeToString(type).isEmpty();
 }
 
-QString Utilities::transferFunctionTypeToString(const Function::functionType type)
+QString Utilities::transferFunctionTypeToString(const Function::functionType &type)
 {
     QString typeString;
     switch(type)
@@ -84,12 +84,12 @@ QString Utilities::transferFunctionTypeToString(const Function::functionType typ
     return typeString;
 }
 
-bool Utilities::isValidConnectionType(const Connection::connectionType type)
+bool Utilities::isValidConnectionType(const Connection::connectionType &type)
 {
     return !Utilities::transferConnectionTypeToString(type).isEmpty();
 }
 
-QString Utilities::transferConnectionTypeToString(Connection::connectionType type)
+QString Utilities::transferConnectionTypeToString(const Connection::connectionType &type)
 {
     QString typeString;
     switch(type)

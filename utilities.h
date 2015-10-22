@@ -13,12 +13,12 @@ private:
     static Utilities* utility;
 public:
     explicit Utilities(QObject *parent = 0);
-    static bool isValidTaskType(const Task::taskType type);
-    static QString transferTaskTypetoString(Task::taskType type);
-    static bool isValidFunctionType(const Function::functionType type);
-    static QString transferFunctionTypeToString(const Function::functionType type);
-    static bool isValidConnectionType(const Connection::connectionType type);
-    static QString transferConnectionTypeToString(Connection::connectionType type);
+    static bool isValidTaskType(const Task::taskType &type);
+    static QString transferTaskTypetoString(const Task::taskType &type);
+    static bool isValidFunctionType(const Function::functionType &type);
+    static QString transferFunctionTypeToString(const Function::functionType &type);
+    static bool isValidConnectionType(const Connection::connectionType &type);
+    static QString transferConnectionTypeToString(const Connection::connectionType &type);
 
 
 signals:

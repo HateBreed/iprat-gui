@@ -32,7 +32,7 @@ public:
     Task(const QString &taskDescription, const Task::taskType &abstractType);
 
     int getMultiplicity() const;
-    void setMultiplicity(int value);
+    void setMultiplicity(int &value);
 
     taskType getType() const;
     bool setType(const Task::taskType &abstractType);
