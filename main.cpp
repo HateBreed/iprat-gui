@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
         actor->addTask(new Task(Task::controlling));
         actor->addTask(new Task(Task::source));
         actor->addFunction(new Function("Something",Function::ADMINISTRATION));
-        actor->addFunction(new Function("Something",Function::MEASUREMENT));
+        actor->addFunction(new Function("Something2",Function::MEASUREMENT));
         actors.append(actor);
     }
 

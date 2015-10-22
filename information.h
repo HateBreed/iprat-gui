@@ -10,14 +10,18 @@ class Information : public QObject
     Q_ENUMS(informationType)
     Q_ENUMS(informationIdentifiability)
 private:
-    int multiplicity;
-    QString description;
-    qint16 id;
+    int iMultiplicity;
+    QString iDescription;
+    qint16 iId;
+    explicit Information(QObject *parent = 0);
 
 public:
     enum informationIdentifiability{identifiable,identified,nonidentifiable};
     enum informationType{identification, raw, processed, control, configuration, syslog, preferences};
-    Information();
+
+    informationIdentifiability iIdentifiability;
+    informationType iType;
+
     Information(const QString &name,
                 informationType type,
                 informationIdentifiability identifiability,

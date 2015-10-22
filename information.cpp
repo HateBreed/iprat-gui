@@ -3,20 +3,31 @@
 
 QString Information::getDescription() const
 {
-    return description;
+    return iDescription;
 }
 
 void Information::setDescription(const QString &value)
 {
-    description = value;
+    iDescription = QString(value);
 }
 
 qint16 Information::getId() const
 {
-    return id;
+    return iId;
 }
-Information::Information()
+Information::Information(QObject *parent) :
+    QObject(parent)
 {
-    id = identificationCreator::getInstance()->getNextInformationId();
+
+}
+
+Information::Information(const QString &name, Information::informationType type, Information::informationIdentifiability identifiability, const int multiplicity)
+{
+    iId = identificationCreator::getInstance()->getNextInformationId();
+    iDescription = QString(name);
+    iType = type;
+    iIdentifiability = identifiability;
+    iMultiplicity = multiplicity;
+
 }
 

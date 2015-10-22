@@ -25,3 +25,9 @@ Task::Task(const taskType &abstractType)
     type = abstractType;
 }
 
+Task::Task(QObject *parent) :
+    QObject(parent)
+{
+
+}
+

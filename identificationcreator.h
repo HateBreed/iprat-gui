@@ -7,10 +7,10 @@ class identificationCreator : public QObject
 {
     Q_OBJECT
 private:
-        qint16 actorIdPool;
-        qint16 connectionIdPool;
-        qint16 informationIdPool;
-        static identificationCreator* _self;
+        qint16 iActorIdPool;
+        qint16 iConnectionIdPool;
+        qint16 iInformationIdPool;
+        static identificationCreator* creator;
 
         explicit identificationCreator(QObject *parent = 0);
 public:

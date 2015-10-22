@@ -11,20 +11,22 @@
 
 class Actor : public QObject
 {
+    Q_OBJECT
 private:
-    QString description;
-    qint16 id; //unique
-    QList<Information*> informations;
-    QList<Connection*> connections;
-    QList<Task*> tasks;
-    QList<Function*> functions;
-    Actor();
+    QString iDescription;
+    qint16 iId; //unique
+    QList<Information*> iInformationList;
+    QList<Connection*> iConnectionList;
+    QList<Task*> iTaskList;
+    QList<Function*> iFunctionList;
+    explicit Actor(QObject *parent = 0);
 
 public:
 
     Actor(const QString &name);
     Actor(const char* &name);
-    Actor(const QList<Information*> _informations,
+    Actor(const QString &name,
+          const QList<Information*> _informations,
           const QList<Connection*> _connections,
           const QList<Task*> _tasks,
           const QList<Function*> _functions);
@@ -40,11 +42,11 @@ public:
     int getConnectionCount();
 
     void addTask(Task* task);
-    const Task* getTask(const QString name);
+    const Task* getTask(const QString &name);
     int getTaskCount();
 
     void addFunction(Function* function);
-    const Function* getFunction(const QString name);
+    const Function* getFunction(const QString &name);
     int getFunctionCount();
 
 

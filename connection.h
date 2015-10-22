@@ -9,18 +9,19 @@ class Connection : public QObject
     Q_OBJECT
     Q_ENUMS(connectionType)
 private:
-    qint16 id;
-    qint16 actorStart;
-    qint16 actorEnd;
-    QList<Information> datalist;
-    Connection();
+    qint16 iId;
+    qint16 iActorStart;
+    qint16 iActorEnd;
+    QList<Information> iInformationList;
+    explicit Connection(QObject *parent = 0);
 public:
     enum connectionType {
         CONN_IN,
         CONN_OUT,
         CONN_BI
     };
-    connectionType type;
+    connectionType iType;
+
     Connection(const connectionType &value, const qint16 &start, const qint16 &end);
 
     connectionType getType() const;

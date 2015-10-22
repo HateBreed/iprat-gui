@@ -4,18 +4,18 @@
 
 Connection::connectionType Connection::getType() const
 {
-    return type;
+    return iType;
 }
 
 void Connection::setType(const connectionType &value)
 {
-    type = value;
+    iType = value;
 }
 
 const QString Connection::getTypeString() const
 {
     QString typeString;
-    switch(type)
+    switch(iType)
     {
     case CONN_BI:
         typeString = "Bidirectional";
@@ -34,40 +34,41 @@ const QString Connection::getTypeString() const
 
 qint16 Connection::getId()
 {
-    return id;
+    return iId;
 }
 
 qint16 Connection::getStartConnection()
 {
-    return actorStart;
+    return iActorStart;
 }
 
 qint16 Connection::getEndConnection()
 {
-    return actorEnd;
+    return iActorEnd;
 }
 
 qint16 *Connection::getConnectionEndpoints()
 {
     qint16* endpoints = new qint16[2];
-    endpoints[0] = actorStart;
-    endpoints[1] = actorEnd;
+    endpoints[0] = iActorStart;
+    endpoints[1] = iActorEnd;
     return endpoints;
 }
 
-Connection::Connection()
+Connection::Connection(QObject *parent) :
+    QObject(parent)
 {
-    id = identificationCreator::getInstance()->getNextConnectionId();
+
 }
 
 Connection::Connection(const Connection::connectionType &value,
                        const qint16 &start,
                        const qint16 &end)
 {
-    id = identificationCreator::getInstance()->getNextConnectionId();
-    type = value;
-    actorStart = start;
-    actorEnd = end;
+    iId = identificationCreator::getInstance()->getNextConnectionId();
+    iType = value;
+    iActorStart = start;
+    iActorEnd = end;
 }
 
 

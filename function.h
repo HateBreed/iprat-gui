@@ -3,14 +3,15 @@
 
 #include <QObject>
 #include "connection.h"
+#include "information.h"
 
 class Function : public QObject
 {
-
+    Q_OBJECT
 private:
-    QString description;
-    QList<qint16> informations;
-    Function();
+    QString iDescription;
+    QList<qint16> iInformationIdList;
+    explicit Function(QObject *parent = 0);
 public:
     enum functionType {
         MEASUREMENT,
@@ -22,7 +23,8 @@ public:
         VALUE_ADDED_SERVICES,
         ADMINISTRATION,
     };
-    functionType type;
+    functionType iType;
+
 
     Function(const QString &functionDescription, const functionType &value);
 
@@ -33,6 +35,10 @@ public:
     void setType(const functionType &value);
 
     QString getTypeString() const;
+
+    bool addInformation(Information* information);
+    const QList<qint16>* getInformationList();
+    bool hasInformation(Information* information);
 
 signals:
 

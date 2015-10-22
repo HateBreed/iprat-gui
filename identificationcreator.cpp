@@ -2,37 +2,37 @@
 #include <stdio.h>
 #include "identificationcreator.h"
 
-identificationCreator* identificationCreator::_self = NULL;
+identificationCreator* identificationCreator::creator = NULL;
 
 identificationCreator::identificationCreator(QObject *parent) :
     QObject(parent)
 {
-    actorIdPool = 0;
-    connectionIdPool = 0;
-    informationIdPool = 0;
-    _self = NULL;
+    iActorIdPool = 0;
+    iConnectionIdPool = 0;
+    iInformationIdPool = 0;
+    creator = NULL;
 }
 
 identificationCreator* identificationCreator::getInstance()
 {
-    if (!_self) {
-        _self = new identificationCreator;
-        printf("Created new identifiaction creator.\n");
+    if (!creator) {
+        creator = new identificationCreator;
+        qDebug() << "Created new identifiaction creator.";
     }
-    return _self;
+    return creator;
 }
 
 qint16 identificationCreator::getNextActorId()
 {
-    return ++actorIdPool;
+    return ++iActorIdPool;
 }
 
 qint16 identificationCreator::getNextConnectionId()
 {
-    return ++connectionIdPool;
+    return ++iConnectionIdPool;
 }
 
 qint16 identificationCreator::getNextInformationId()
 {
-    return ++informationIdPool;
+    return ++iInformationIdPool;
 }

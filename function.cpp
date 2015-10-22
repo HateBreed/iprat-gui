@@ -1,3 +1,4 @@
+#include <QDebug>
 #include "function.h"
 
 #include "identificationcreator.h"
@@ -5,28 +6,28 @@
 
 QString Function::getDescription() const
 {
-    return description;
+    return iDescription;
 }
 
 void Function::setDescription(const QString &value)
 {
-    description = value;
+    iDescription = value;
 }
 
 int Function::getType() const
 {
-    return type;
+    return iType;
 }
 
 void Function::setType(const functionType &value)
 {
-    type = value;
+    iType = value;
 }
 
 QString Function::getTypeString() const
 {
     QString typeString;
-    switch(type)
+    switch(iType)
     {
     case ADMINISTRATION:
         typeString = "Administration";
@@ -57,14 +58,16 @@ QString Function::getTypeString() const
     }
     return typeString;
 }
-Function::Function()
+
+Function::Function(QObject *parent) :
+    QObject(parent)
 {
 
 }
 
 Function::Function(const QString &functionDescription, const Function::functionType &value)
 {
-    description = QString(functionDescription);
-    type = value;
+    iDescription = QString(functionDescription);
+    iType = value;
 }
 

@@ -8,16 +8,16 @@
 class Task : public QObject
 {
     Q_OBJECT
-    Q_ENUMS(type)
+    Q_ENUMS(iType)
 private:
-    int multiplicity;
-    QList<Information> datalist;
-    QString description;
-    Task();
+    int iMultiplicity;
+    QList<Information> iInformationList;
+    QString iDescription;
+    explicit Task(QObject *parent = 0);
 
 public:
     enum taskType{controlling,source,reading,processing,storing,lowaccess,highaccess};
-    taskType type;
+    taskType iType;
     Task(const enum taskType &abstractType);
 
     QString getDescription() const;
@@ -29,7 +29,7 @@ public:
     taskType getType() const;
     void setType(enum taskType);
 
-    QList<Information> addInformation(Information &_info);
+    QList<Information> addInformation(Information &information);
 
 
 signals:

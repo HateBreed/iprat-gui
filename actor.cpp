@@ -4,56 +4,59 @@
 
 const QString Actor::getDescription() const
 {
-    return description;
+    return iDescription;
 }
 
 void Actor::setDescription(const QString &value)
 {
-    description = QString(value);
+    iDescription = QString(value);
 }
 
 qint16 Actor::getId() const
 {
-    return id;
+    return iId;
 }
 
-Actor::Actor()
+Actor::Actor(QObject *parent) :
+    QObject(parent)
 {
-    id = identificationCreator::getInstance()->getNextActorId();
+
 }
 
 Actor::Actor(const QString &name)
 {
-    id = identificationCreator::getInstance()->getNextActorId();
-    description = QString(name);
+    iId = identificationCreator::getInstance()->getNextActorId();
+    iDescription = QString(name);
 }
 
 Actor::Actor(const char *&name)
 {
-    id = identificationCreator::getInstance()->getNextActorId();
-    description = QString(name);
+    iId = identificationCreator::getInstance()->getNextActorId();
+    iDescription = QString(name);
 }
 
-Actor::Actor(const QList<Information*> _informations,
+Actor::Actor(const QString &name,
+             const QList<Information*> _informations,
              const QList<Connection*> _connections,
              const QList<Task*> _tasks,
              const QList<Function*> _functions)
 {
-    id = identificationCreator::getInstance()->getNextActorId();
-    informations = QList<Information*>(_informations);
-    connections = QList<Connection*>(_connections);
-    tasks = QList<Task*>(_tasks);
-    functions = QList<Function*>(_functions);
+    iDescription = QString(name);
+    iId = identificationCreator::getInstance()->getNextActorId();
+    iInformationList = QList<Information*>(_informations);
+    iConnectionList = QList<Connection*>(_connections);
+    iTaskList = QList<Task*>(_tasks);
+    iFunctionList = QList<Function*>(_functions);
 }
 
 void Actor::addInformation(Information* information)
 {
-    informations.append(information);
+    iInformationList.append(information);
 }
 
 const Information* Actor::getInformation(const QString &name)
 {
-    QListIterator<Information*> iterator(informations);
+    QListIterator<Information*> iterator(iInformationList);
 
     while(iterator.hasNext())
     {
@@ -69,7 +72,7 @@ const Information* Actor::getInformation(const QString &name)
 
 const Information *Actor::getInformation(const qint16 &id)
 {
-    QListIterator<Information*> iterator(informations);
+    QListIterator<Information*> iterator(iInformationList);
 
     while(iterator.hasNext())
     {
@@ -85,17 +88,17 @@ const Information *Actor::getInformation(const qint16 &id)
 
 int Actor::getInformationCount()
 {
-    return informations.size();
+    return iInformationList.size();
 }
 
 void Actor::addConnection(Connection* connection)
 {
-    connections.append(connection);
+    iConnectionList.append(connection);
 }
 
 const QList<Connection*> Actor::getConnections(enum Connection::connectionType type)
 {
-    QListIterator<Connection*> iterator(connections);
+    QListIterator<Connection*> iterator(iConnectionList);
     QList<Connection*> selected;
 
     while(iterator.hasNext())
@@ -112,17 +115,17 @@ const QList<Connection*> Actor::getConnections(enum Connection::connectionType t
 
 int Actor::getConnectionCount()
 {
-    return connections.size();
+    return iConnectionList.size();
 }
 
 void Actor::addTask(Task* task)
 {
-    tasks.append(task);
+    iTaskList.append(task);
 }
 
-const Task* Actor::getTask(const QString name)
+const Task* Actor::getTask(const QString &name)
 {
-    QListIterator<Task*> iterator(tasks);
+    QListIterator<Task*> iterator(iTaskList);
 
     while(iterator.hasNext())
     {
@@ -138,17 +141,17 @@ const Task* Actor::getTask(const QString name)
 
 int Actor::getTaskCount()
 {
-    return tasks.size();
+    return iTaskList.size();
 }
 
 void Actor::addFunction(Function* function)
 {
-    functions.append(function);
+    iFunctionList.append(function);
 }
 
-const Function* Actor::getFunction(const QString name)
+const Function* Actor::getFunction(const QString &name)
 {
-    QListIterator<Function*> iterator(functions);
+    QListIterator<Function*> iterator(iFunctionList);
 
     while(iterator.hasNext())
     {
@@ -164,6 +167,6 @@ const Function* Actor::getFunction(const QString name)
 
 int Actor::getFunctionCount()
 {
-    return functions.size();
+    return iFunctionList.size();
 }
 
