@@ -4,25 +4,22 @@
 #include <QJsonObject>
 #include <QObject>
 #include <QList>
+#include "componentbase.h"
 #include "information.h"
 #include "connection.h"
 #include "task.h"
 #include "function.h"
 
-class Actor : public QObject
+class Actor : public ComponentBase
 {
-    Q_OBJECT
 private:
-    QString iDescription;
-    qint16 iId; //unique
     QList<Information*> iInformationList;
     QList<Connection*> iConnectionList;
     QList<Task*> iTaskList;
     QList<Function*> iFunctionList;
-    explicit Actor(QObject *parent = 0);
+    explicit Actor(ComponentBase *parent = 0);
 
 public:
-
     Actor(const QString &name);
     Actor(const char* &name);
     Actor(const QString &name,
@@ -48,12 +45,6 @@ public:
     void addFunction(Function* function);
     const Function* getFunction(const QString &name);
     int getFunctionCount();
-
-
-    const QString getDescription() const;
-    void setDescription(const QString &value);
-
-    qint16 getId() const;
 
 signals:
 

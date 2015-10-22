@@ -1,22 +1,9 @@
 #include "information.h"
 #include "identificationcreator.h"
 
-QString Information::getDescription() const
-{
-    return iDescription;
-}
 
-void Information::setDescription(const QString &value)
-{
-    iDescription = QString(value);
-}
-
-qint16 Information::getId() const
-{
-    return iId;
-}
-Information::Information(QObject *parent) :
-    QObject(parent)
+Information::Information(ComponentBase *parent) :
+    ComponentBase(parent)
 {
 
 }

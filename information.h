@@ -3,21 +3,30 @@
 
 #include <QObject>
 #include <QString>
+#include "componentbase.h"
 
-class Information : public QObject
+class Information : public ComponentBase
 {
-    Q_OBJECT
     Q_ENUMS(informationType)
     Q_ENUMS(informationIdentifiability)
 private:
     int iMultiplicity;
-    QString iDescription;
-    qint16 iId;
-    explicit Information(QObject *parent = 0);
+    explicit Information(ComponentBase *parent = 0);
 
 public:
-    enum informationIdentifiability{identifiable,identified,nonidentifiable};
-    enum informationType{identification, raw, processed, control, configuration, syslog, preferences};
+    enum informationIdentifiability{
+        identifiable,
+        identified,
+        nonidentifiable};
+
+    enum informationType{
+        identification,
+        raw,
+        processed,
+        control,
+        configuration,
+        syslog,
+        preferences};
 
     informationIdentifiability iIdentifiability;
     informationType iType;
@@ -26,13 +35,6 @@ public:
                 informationType type,
                 informationIdentifiability identifiability,
                 const int multiplicity);
-
-
-
-    QString getDescription() const;
-    void setDescription(const QString &value);
-
-    qint16 getId() const;
 
 signals:
 

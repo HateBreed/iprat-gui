@@ -2,19 +2,20 @@
 #define FUNCTION_H
 
 #include <QObject>
+#include "componentbase.h"
 #include "connection.h"
 #include "information.h"
 
-class Function : public QObject
+class Function : public ComponentBase
 {
     Q_OBJECT
 private:
-    QString iDescription;
     QList<qint16> iInformationIdList;
-    explicit Function(QObject *parent = 0);
+    explicit Function(ComponentBase *parent = 0);
 public:
+    // Types start from 1 in the generic functional model
     enum functionType {
-        MEASUREMENT,
+        MEASUREMENT=1,
         GENERATION,
         MANAGEMENT,
         PROCESSING,
@@ -23,15 +24,10 @@ public:
         VALUE_ADDED_SERVICES,
         ADMINISTRATION,
     };
-    functionType iType;
-
 
     Function(const QString &functionDescription, const functionType &value);
 
-    QString getDescription() const;
-    void setDescription(const QString &value);
-
-    int getType() const;
+    Function::functionType getType() const;
     void setType(const functionType &value);
 
     QString getTypeString() const;

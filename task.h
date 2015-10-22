@@ -3,33 +3,38 @@
 
 #include <QObject>
 #include <QList>
+#include "componentbase.h"
 #include "information.h"
 
-class Task : public QObject
+class Task : public ComponentBase
 {
-    Q_OBJECT
-    Q_ENUMS(iType)
+    Q_ENUMS(taskType)
 private:
     int iMultiplicity;
-    QList<Information> iInformationList;
-    QString iDescription;
-    explicit Task(QObject *parent = 0);
+    QList<Information*> iInformationList;
+    explicit Task(ComponentBase *parent = 0);
 
 public:
-    enum taskType{controlling,source,reading,processing,storing,lowaccess,highaccess};
-    taskType iType;
-    Task(const enum taskType &abstractType);
+    enum taskType{
+        controlling=1,
+        source,
+        reading,
+        processing,
+        storing,
+        lowaccess,
+        highaccess
+    };
 
-    QString getDescription() const;
-    void setDescription(const QString &value);
+    Task(const Task::taskType &abstractType);
+    Task(const QString &taskDescription, const Task::taskType &abstractType);
 
     int getMultiplicity() const;
     void setMultiplicity(int value);
 
     taskType getType() const;
-    void setType(enum taskType);
+    void setType(const Task::taskType &abstractType);
 
-    QList<Information> addInformation(Information &information);
+    QList<Information*> addInformation(Information &information);
 
 
 signals:

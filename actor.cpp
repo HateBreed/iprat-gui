@@ -2,23 +2,7 @@
 #include "actor.h"
 #include "identificationcreator.h"
 
-const QString Actor::getDescription() const
-{
-    return iDescription;
-}
-
-void Actor::setDescription(const QString &value)
-{
-    iDescription = QString(value);
-}
-
-qint16 Actor::getId() const
-{
-    return iId;
-}
-
-Actor::Actor(QObject *parent) :
-    QObject(parent)
+Actor::Actor(ComponentBase *parent) : ComponentBase(parent)
 {
 
 }

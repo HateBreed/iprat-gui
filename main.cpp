@@ -3,6 +3,7 @@
 #include "identificationcreator.h"
 #include <QDebug>
 #include "actor.h"
+#include "componentbase.h"
 
 int main(int argc, char *argv[])
 {

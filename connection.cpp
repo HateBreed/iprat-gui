@@ -32,11 +32,6 @@ const QString Connection::getTypeString() const
     return typeString;
 }
 
-qint16 Connection::getId()
-{
-    return iId;
-}
-
 qint16 Connection::getStartConnection()
 {
     return iActorStart;
@@ -55,8 +50,8 @@ qint16 *Connection::getConnectionEndpoints()
     return endpoints;
 }
 
-Connection::Connection(QObject *parent) :
-    QObject(parent)
+Connection::Connection(ComponentBase *parent) :
+    ComponentBase(parent)
 {
 
 }

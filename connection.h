@@ -2,18 +2,17 @@
 #define CONNECTION_H
 
 #include <QObject>
+#include "componentbase.h"
 #include "information.h"
 
-class Connection : public QObject
+class Connection : public ComponentBase
 {
-    Q_OBJECT
     Q_ENUMS(connectionType)
 private:
-    qint16 iId;
     qint16 iActorStart;
     qint16 iActorEnd;
     QList<Information> iInformationList;
-    explicit Connection(QObject *parent = 0);
+    explicit Connection(ComponentBase *parent = 0);
 public:
     enum connectionType {
         CONN_IN,
@@ -29,7 +28,6 @@ public:
 
     const QString getTypeString() const;
 
-    qint16 getId();
     qint16 getStartConnection();
     qint16 getEndConnection();
     qint16 *getConnectionEndpoints();

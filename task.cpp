@@ -1,32 +1,38 @@
 #include "task.h"
 
-QString Task::getDescription() const
-{
-    return description;
-}
-
-void Task::setDescription(const QString &value)
-{
-    description = value;
-}
-
 int Task::getMultiplicity() const
 {
-    return multiplicity;
+    return iMultiplicity;
 }
 
 void Task::setMultiplicity(int value)
 {
-    multiplicity = value;
+    iMultiplicity = value;
 }
 
-Task::Task(const taskType &abstractType)
+Task::taskType Task::getType() const
 {
-    type = abstractType;
+    return (taskType)iId;
 }
 
-Task::Task(QObject *parent) :
-    QObject(parent)
+void Task::setType(const Task::taskType &abstractType)
+{
+    iId = (int)abstractType;
+}
+
+Task::Task(const Task::taskType &abstractType)
+{
+    iId = abstractType;
+}
+
+Task::Task(const QString &taskDescription, const Task::taskType &abstractType)
+{
+    iDescription = QString(taskDescription);
+    iId = abstractType;
+}
+
+Task::Task(ComponentBase *parent) :
+    ComponentBase(parent)
 {
 
 }
