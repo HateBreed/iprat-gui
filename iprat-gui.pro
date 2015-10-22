@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     task.cpp \
     function.cpp \
     identificationcreator.cpp \
-    componentbase.cpp
+    componentbase.cpp \
+    utilities.cpp
 
 HEADERS  += mainwindow.h \
     actor.h \
@@ -29,6 +30,7 @@ HEADERS  += mainwindow.h \
     task.h \
     function.h \
     identificationcreator.h \
-    componentbase.h
+    componentbase.h \
+    utilities.h
 
 FORMS    += mainwindow.ui

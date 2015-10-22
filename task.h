@@ -10,11 +10,14 @@ class Task : public ComponentBase
 {
     Q_ENUMS(taskType)
 private:
+
     int iMultiplicity;
     QList<Information*> iInformationList;
     explicit Task(ComponentBase *parent = 0);
 
+    bool searchFromList(const Information* information);
 public:
+
     enum taskType{
         controlling=1,
         source,
@@ -28,13 +31,17 @@ public:
     Task(const Task::taskType &abstractType);
     Task(const QString &taskDescription, const Task::taskType &abstractType);
 
+    bool isValidType(const Task::taskType &type);
+    QString transferTypetoString(Task::taskType type) const;
+
     int getMultiplicity() const;
     void setMultiplicity(int value);
 
     taskType getType() const;
-    void setType(const Task::taskType &abstractType);
+    bool setType(const Task::taskType &abstractType);
+    QString getTypeString() const;
 
-    QList<Information*> addInformation(Information &information);
+    bool addInformation(Information* information);
 
 
 signals:
