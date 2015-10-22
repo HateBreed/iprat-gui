@@ -33,6 +33,6 @@ Function::Function(const QString &functionDescription, const Function::functionT
     iDescription = QString(functionDescription);
 
     iId = value;
-    qDebug() << "Function Id = " << getType() << "\"" << getTypeString() << "\"";
+    //qDebug() << "Function Id = " << getType() << "\"" << getTypeString() << "\"";
 }
 

@@ -19,6 +19,9 @@ private:
     QList<Function*> iFunctionList;
     explicit Actor(ComponentBase *parent = 0);
 
+    bool searchFromTaskList(const Task* task);
+    bool searchFromFunctionList(const Function *function);
+
 public:
     Actor(const QString &name);
     Actor(const char* &name);

@@ -7,6 +7,28 @@ Actor::Actor(ComponentBase *parent) : ComponentBase(parent)
 
 }
 
+bool Actor::searchFromTaskList(const Task *task)
+{
+    QListIterator<Task*> iterator(iTaskList);
+    while(iterator.hasNext())
+    {
+        Task* t = iterator.next();
+        if(t->getType() == task->getType()) return true;
+    }
+    return false;
+}
+
+bool Actor::searchFromFunctionList(const Function *function)
+{
+    QListIterator<Function*> iterator(iFunctionList);
+    while (iterator.hasNext())
+    {
+        Function* f = iterator.next();
+        if(f->getType() == function->getType()) return true;
+    }
+    return false;
+}
+
 Actor::Actor(const QString &name)
 {
     iId = identificationCreator::getInstance()->getNextActorId();
@@ -104,7 +126,9 @@ int Actor::getConnectionCount()
 
 void Actor::addTask(Task* task)
 {
-    iTaskList.append(task);
+    if(searchFromTaskList(task)) qDebug() << "Found existing task with id " << task->getType();
+    //else if(getTask(task->getDescription()) != NULL) qDebug() << "Found existing task with name " << task->getDescription();
+    else iTaskList.append(task);
 }
 
 const Task* Actor::getTask(const QString &name)
@@ -130,7 +154,8 @@ int Actor::getTaskCount()
 
 void Actor::addFunction(Function* function)
 {
-    iFunctionList.append(function);
+    if(searchFromFunctionList(function)) qDebug() << "Found existing function with id " << function->getType();
+    else iFunctionList.append(function);
 }
 
 const Function* Actor::getFunction(const QString &name)

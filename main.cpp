@@ -1,9 +1,27 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include "identificationcreator.h"
 #include <QDebug>
+#include <QTime>
+#include "identificationcreator.h"
+#include "utilities.h"
 #include "actor.h"
 #include "componentbase.h"
+
+qint16 randTask()
+{
+    qint16 id = 0;
+    while(!Utilities::isValidTaskType((Task::taskType)id))
+        id = qrand() % 10;
+    return id;
+}
+
+qint16 randFunction()
+{
+    qint16 id = 0;
+    while(!Utilities::isValidFunctionType((Function::functionType)id))
+        id = qrand() % 10;
+    return id;
+}
 
 int main(int argc, char *argv[])
 {
@@ -13,13 +31,13 @@ int main(int argc, char *argv[])
 
     QList<Actor*> actors;
     Actor* actor;
-    for(int i = 0; i < 10; i++)
+    qsrand((uint)QTime::currentTime().msec());
+
+    for(int i = 0; i < 3; i++)
     {
         actor = new Actor("test");
-        actor->addTask(new Task(Task::controlling));
-        actor->addTask(new Task(Task::source));
-        actor->addFunction(new Function("Something",Function::ADMINISTRATION));
-        actor->addFunction(new Function("Something2",Function::MEASUREMENT));
+        for(int i = 0; i < 8 ; i++, actor->addTask(new Task(Task::taskType(randTask()))));
+        for(int j = 0; j < 8 ; j++, actor->addFunction(new Function("Something", Function::functionType(randFunction()))));
         actors.append(actor);
     }
 
