@@ -7,7 +7,7 @@ Utilities::Utilities(QObject *parent) : QObject(parent)
 
 }
 
-bool Utilities::isValidTaskType(const Task::taskType &type)
+bool Utilities::isValidTaskType(const Task::taskType type)
 {
     // True, when string is not empty, false other
     return !Utilities::transferTaskTypetoString(type).isEmpty();
@@ -44,12 +44,12 @@ QString Utilities::transferTaskTypetoString(Task::taskType type)
     return string;
 }
 
-bool Utilities::isValidFunctionType(const Function::functionType &type)
+bool Utilities::isValidFunctionType(const Function::functionType type)
 {
     return !Utilities::transferFunctionTypeToString(type).isEmpty();
 }
 
-QString Utilities::transferFunctionTypeToString(const Function::functionType &type)
+QString Utilities::transferFunctionTypeToString(const Function::functionType type)
 {
     QString typeString;
     switch(type)
@@ -77,6 +77,31 @@ QString Utilities::transferFunctionTypeToString(const Function::functionType &ty
         break;
     case Function::VALUE_ADDED_SERVICES:
         typeString = "Value added services";
+        break;
+    default:
+        typeString = "";
+    }
+    return typeString;
+}
+
+bool Utilities::isValidConnectionType(const Connection::connectionType type)
+{
+    return !Utilities::transferConnectionTypeToString(type).isEmpty();
+}
+
+QString Utilities::transferConnectionTypeToString(Connection::connectionType type)
+{
+    QString typeString;
+    switch(type)
+    {
+    case Connection::CONN_BI:
+        typeString = "Bidirectional";
+        break;
+    case Connection::CONN_IN:
+        typeString = "Direction IN";
+        break;
+    case Connection::CONN_OUT:
+        typeString = "Direction OUT";
         break;
     default:
         typeString = "";

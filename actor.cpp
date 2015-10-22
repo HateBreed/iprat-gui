@@ -1,6 +1,7 @@
 #include <QDebug>
 #include "actor.h"
 #include "identificationcreator.h"
+#include "utilities.h"
 
 Actor::Actor(ComponentBase *parent) : ComponentBase(parent)
 {
@@ -111,7 +112,7 @@ const QList<Connection*> Actor::getConnections(enum Connection::connectionType t
     {
         Connection* item = iterator.next();
         if(item->getType() == type) {
-            qDebug() << "Found connection with requested type \"" << item->getTypeString() << "\"";
+            qDebug() << "Found connection with requested type \"" << Utilities::transferConnectionTypeToString(item->getType()) << "\"";
             selected.append(item);
         }
 
@@ -177,5 +178,20 @@ const Function* Actor::getFunction(const QString &name)
 int Actor::getFunctionCount()
 {
     return iFunctionList.size();
+}
+
+bool Actor::connectToActor(const Actor *actor, Connection::connectionType direction, QList<Information *> *transferredInformation)
+{
+    if(!actor) return false;
+    if(getId() == actor->getId()) return false;
+    if(!Utilities::isValidConnectionType(direction)) return false;
+
+    Connection* conn;
+    if(transferredInformation) conn = new Connection(direction,getId(), actor->getId(),transferredInformation);
+    else conn = new Connection(direction,getId(),actor->getId());
+
+    iConnectionList.append(conn);
+
+    return true;
 }
 

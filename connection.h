@@ -11,8 +11,9 @@ class Connection : public ComponentBase
 private:
     qint16 iActorStart;
     qint16 iActorEnd;
-    QList<Information> iInformationList;
+    QList<Information*> iInformationList; // Information transferred in this connection
     explicit Connection(ComponentBase *parent = 0);
+    bool searchFromInformationList(Information* information);
 public:
     enum connectionType {
         CONN_IN,
@@ -22,15 +23,16 @@ public:
     connectionType iType;
 
     Connection(const connectionType &value, const qint16 &start, const qint16 &end);
+    Connection(const connectionType &value, const qint16 &start, const qint16 &end, QList<Information*> *informationList);
 
-    connectionType getType() const;
+    connectionType getType();
     void setType(const connectionType &value);
-
-    const QString getTypeString() const;
 
     qint16 getStartConnection();
     qint16 getEndConnection();
     qint16 *getConnectionEndpoints();
+
+    bool addInformation(Information* information);
 
 signals:
 

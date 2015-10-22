@@ -41,6 +41,8 @@ int main(int argc, char *argv[])
         actors.append(actor);
     }
 
+    actor->connectToActor(actors.at(0),Connection::CONN_OUT,NULL);
+
     QListIterator<Actor*> iter(actors);
     while(iter.hasNext())
     {

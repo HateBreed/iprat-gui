@@ -2,7 +2,7 @@
 
 #include "identificationcreator.h"
 
-Connection::connectionType Connection::getType() const
+Connection::connectionType Connection::getType()
 {
     return iType;
 }
@@ -10,26 +10,6 @@ Connection::connectionType Connection::getType() const
 void Connection::setType(const connectionType &value)
 {
     iType = value;
-}
-
-const QString Connection::getTypeString() const
-{
-    QString typeString;
-    switch(iType)
-    {
-    case CONN_BI:
-        typeString = "Bidirectional";
-        break;
-    case CONN_IN:
-        typeString = "Direction IN";
-        break;
-    case CONN_OUT:
-        typeString = "Direction OUT";
-        break;
-    default:
-        typeString = "";
-    }
-    return typeString;
 }
 
 qint16 Connection::getStartConnection()
@@ -50,10 +30,28 @@ qint16 *Connection::getConnectionEndpoints()
     return endpoints;
 }
 
+bool Connection::addInformation(Information *information)
+{
+    if(searchFromInformationList(information)) return true;
+    iInformationList.append(information);
+    return true;
+}
+
 Connection::Connection(ComponentBase *parent) :
     ComponentBase(parent)
 {
 
+}
+
+bool Connection::searchFromInformationList(Information *information)
+{
+    QListIterator<Information*> iterator(iInformationList);
+    while(iterator.hasNext())
+    {
+        Information* i = iterator.next();
+        if(i->getId() == information->getId()) return true;
+    }
+    return false;
 }
 
 Connection::Connection(const Connection::connectionType &value,
@@ -64,6 +62,12 @@ Connection::Connection(const Connection::connectionType &value,
     iType = value;
     iActorStart = start;
     iActorEnd = end;
+}
+
+Connection::Connection(const Connection::connectionType &value, const qint16 &start, const qint16 &end, QList<Information *> *informationList)
+{
+    Connection(value,start,end);
+    iInformationList = QList<Information*>(*informationList);
 }
 
 

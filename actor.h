@@ -13,7 +13,7 @@
 class Actor : public ComponentBase
 {
 private:
-    QList<Information*> iInformationList;
+    QList<Information*> iInformationList; // Withheld list
     QList<Connection*> iConnectionList;
     QList<Task*> iTaskList;
     QList<Function*> iFunctionList;
@@ -48,6 +48,8 @@ public:
     void addFunction(Function* function);
     const Function* getFunction(const QString &name);
     int getFunctionCount();
+
+    bool connectToActor(const Actor* actor, Connection::connectionType direction, QList<Information *> *transferredInformation);
 
 signals:
 
