@@ -70,4 +70,11 @@ Connection::Connection(const Connection::connectionType &value, const quint16 &s
     iInformationList = QList<Information*>(*informationList);
 }
 
+bool Connection::operator==(const Connection &connection)
+{
+    if(getType() == connection.iType) return true;
+    else if(getId() == connection.iId) return true;
+    else return false;
+}
+
 

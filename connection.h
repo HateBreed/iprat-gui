@@ -16,7 +16,7 @@ private:
     bool searchFromInformationList(Information* information);
 public:
     enum connectionType {
-        CONN_IN,
+        CONN_IN=1,
         CONN_OUT,
         CONN_BI
     };
@@ -24,6 +24,8 @@ public:
 
     Connection(const connectionType &value, const quint16 &start, const quint16 &end);
     Connection(const connectionType &value, const quint16 &start, const quint16 &end, QList<Information*> *informationList);
+
+    bool operator==(const Connection &connection);
 
     connectionType getType();
     void setType(const connectionType &value);
