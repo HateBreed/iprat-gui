@@ -31,6 +31,8 @@ public:
     Task(const Task::taskType &abstractType);
     Task(const QString &taskDescription, const Task::taskType &abstractType);
 
+    bool operator==(const Task &task);
+
     int getMultiplicity() const;
     void setMultiplicity(int &value);
 

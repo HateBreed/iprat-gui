@@ -50,6 +50,11 @@ Task::Task(const QString &taskDescription, const Task::taskType &abstractType)
 
 }
 
+bool Task::operator==(const Task &task)
+{
+    return this->getType() == task.getType();
+}
+
 Task::Task(ComponentBase *parent) :
     ComponentBase(parent)
 {
