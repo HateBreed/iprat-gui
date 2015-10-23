@@ -29,7 +29,7 @@ public:
     };
 
     Task(const Task::taskType &abstractType);
-    Task(const QString &taskDescription, const Task::taskType &abstractType);
+    Task(const Task::taskType &abstractType, const QString &taskDescription);
 
     bool operator==(const Task &task);
 

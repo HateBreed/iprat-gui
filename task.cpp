@@ -43,7 +43,7 @@ Task::Task(const Task::taskType &abstractType)
     //qDebug() << "Task Id = " << getType() << "\"" << getTypeString() << "\"";
 }
 
-Task::Task(const QString &taskDescription, const Task::taskType &abstractType)
+Task::Task(const Task::taskType &abstractType, const QString &taskDescription)
 {
     iDescription = QString(taskDescription);
     iId = abstractType;
