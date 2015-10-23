@@ -10,15 +10,13 @@ identificationCreator::identificationCreator(QObject *parent) :
     iActorIdPool = 0;
     iConnectionIdPool = 0;
     iInformationIdPool = 0;
-    creator = NULL;
+    creator = this;
+    qDebug() << "Created new identifiaction creator.";
 }
 
 identificationCreator* identificationCreator::getInstance()
 {
-    if (!creator) {
-        creator = new identificationCreator;
-        qDebug() << "Created new identifiaction creator.";
-    }
+    if (!creator) new identificationCreator;
     return creator;
 }
 
