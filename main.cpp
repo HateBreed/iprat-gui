@@ -30,18 +30,18 @@ int main(int argc, char *argv[])
     w.show();
 
     QList<Actor*> actors;
-    Actor* actor;
     qsrand((uint)QTime::currentTime().msec());
 
     for(int i = 0; i < 3; i++)
     {
-        actor = new Actor("test");
-        for(int i = 0; i < 8 ; i++, actor->addTask(new Task(Task::taskType(randTask()))));
-        for(int j = 0; j < 8 ; j++, actor->addFunction(new Function("Something", Function::functionType(randFunction()))));
+        Actor* actor = new Actor("test");
+        qDebug() << "Created actor" << actor->getId();
+        for(int i = 0; i < 8 ; i++, actor->addTask((Task::taskType)randTask(),QString("")));
+        for(int j = 0; j < 8 ; j++, actor->addFunction((Function::functionType)randFunction(),QString("Something")));
         actors.append(actor);
     }
 
-    actor->connectToActor(actors.at(0),Connection::CONN_OUT,NULL);
+    actors.at(2)->connectToActor(actors.at(0),Connection::CONN_OUT,NULL);
 
     QListIterator<Actor*> iter(actors);
     while(iter.hasNext())
@@ -51,6 +51,7 @@ int main(int argc, char *argv[])
         qDebug() << "With " << a->getTaskCount() << " tasks, " << a->getFunctionCount() << " functions, " << a->getConnectionCount()
                  << " connections.";
     }
+    foreach(Actor* ac, actors) if(ac) delete ac;
 
 
     return a.exec();

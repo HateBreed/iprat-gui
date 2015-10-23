@@ -23,6 +23,7 @@ private:
     bool searchFromFunctionList(const Function *function);
 
 public:
+    ~Actor();
     Actor(const QString &name);
     Actor(const char* &name);
     Actor(const QString &name,
@@ -34,23 +35,23 @@ public:
 
     void addInformation(Information* information);
     const Information* getInformation(const QString &name);
-    const Information* getInformation(const qint16 &id);
+    const Information* getInformation(const quint16 &id);
     int getInformationCount();
 
-    void addConnection(Connection* connection);
-    const QList<Connection*> getConnections(enum Connection::connectionType);
+    const QList<quint16> getConnections(Connection::connectionType &type);
     int getConnectionCount();
 
-    void addTask(Task* task);
-    const Task* getTask(const QString &name);
+    bool addTask(const Task::taskType &type, const QString &description);
+    const Task &getTask(const QString &name);
     int getTaskCount();
 
-    void addFunction(Function* function);
-    const Function* getFunction(const QString &name);
+    bool addFunction(const Function::functionType &type, const QString &description);
+    const Function& getFunction(const QString &name);
     int getFunctionCount();
 
+    bool connectToActor(const Actor* actor, Connection::connectionType direction);
     bool connectToActor(const Actor* actor, Connection::connectionType direction, QList<Information *> *transferredInformation);
-
+    bool disconnectFromActor(const Actor* actor, quint16 connectionId);
 
 signals:
 

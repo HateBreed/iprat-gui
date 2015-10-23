@@ -23,7 +23,7 @@ public:
     connectionType iType;
 
     Connection(const connectionType &value, const quint16 &start, const quint16 &end);
-    Connection(const connectionType &value, const quint16 &start, const quint16 &end, QList<Information*> *informationList);
+    Connection(const connectionType &value, const quint16 &start, const quint16 &end, QList<Information *> *informationList);
 
     bool operator==(const Connection &connection);
 

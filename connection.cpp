@@ -67,7 +67,7 @@ Connection::Connection(const Connection::connectionType &value,
 Connection::Connection(const Connection::connectionType &value, const quint16 &start, const quint16 &end, QList<Information *> *informationList)
 {
     Connection(value,start,end);
-    iInformationList = QList<Information*>(*informationList);
+    if(informationList) iInformationList = QList<Information*>(*informationList);
 }
 
 bool Connection::operator==(const Connection &connection)

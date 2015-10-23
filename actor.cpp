@@ -8,13 +8,21 @@ Actor::Actor(ComponentBase *parent) : ComponentBase(parent)
 
 }
 
+Actor::~Actor()
+{
+    foreach (Information* info, iInformationList) if(info) delete info;
+    foreach (Connection* conn, iConnectionList) if(conn) delete conn;
+    foreach (Function* func, iFunctionList) if(func) delete func;
+    foreach (Task* task, iTaskList) if(task) delete task;
+}
+
 bool Actor::searchFromTaskList(const Task *task)
 {
     QListIterator<Task*> iterator(iTaskList);
     while(iterator.hasNext())
     {
         Task* t = iterator.next();
-        if(t->getType() == task->getType()) return true;
+        if(*t == *task) return true;
     }
     return false;
 }
@@ -25,7 +33,7 @@ bool Actor::searchFromFunctionList(const Function *function)
     while (iterator.hasNext())
     {
         Function* f = iterator.next();
-        if(f->getType() == function->getType()) return true;
+        if(*f == *function) return true;
     }
     return false;
 }
@@ -98,97 +106,163 @@ int Actor::getInformationCount()
     return iInformationList.size();
 }
 
-void Actor::addConnection(Connection* connection)
+/**
+ * @brief Actor::getConnections
+ * @param type
+ * @return QList of connection id's, empty if type is invalid, all if type is 0
+ */
+const QList<quint16> Actor::getConnections(enum Connection::connectionType &type)
 {
-    iConnectionList.append(connection);
-}
+    QList<quint16> selected;
 
-const QList<Connection*> Actor::getConnections(enum Connection::connectionType type)
-{
-    QListIterator<Connection*> iterator(iConnectionList);
-    QList<Connection*> selected;
+    // Return all
+    if(type == 0)
+       foreach (Connection* conn, iConnectionList) selected.append(conn->getId());
 
-    while(iterator.hasNext())
+    else if (Utilities::isValidConnectionType(type))
     {
-        Connection* item = iterator.next();
-        if(item->getType() == type) {
-            qDebug() << "Found connection with requested type \"" << Utilities::transferConnectionTypeToString(item->getType()) << "\"";
-            selected.append(item);
+        QListIterator<Connection*> iterator(iConnectionList);
+        while(iterator.hasNext())
+        {
+            Connection* item = iterator.next();
+            if(item->getType() == type) {
+                qDebug() << "Found connection with requested type \"" << Utilities::transferConnectionTypeToString(item->getType()) << "\"";
+                selected.append(item->getId());
+            }
         }
-
     }
-    return selected;
+    return selected; // Empty list if not valid
 }
 
+/**
+ * @brief Actor::getConnectionCount
+ * @return
+ */
 int Actor::getConnectionCount()
 {
     return iConnectionList.size();
 }
 
-void Actor::addTask(Task* task)
+/**
+ * @brief Actor::addTask
+ * @param task
+ * @return true if added (other with same id does not exist in list), false otherwise
+ */
+bool Actor::addTask(const Task::taskType &type, const QString &description)
 {
-    if(searchFromTaskList(task)) qDebug() << "Found existing task with id " << task->getType();
+    if(!Utilities::isValidTaskType(type)) return false;
+
+    Task* task = new Task(type,description);
+    if(searchFromTaskList(task))
+    {
+        qDebug() << "Found existing task with id " << task->getType();
+        delete task;
+        return false;
+    }
     //else if(getTask(task->getDescription()) != NULL) qDebug() << "Found existing task with name " << task->getDescription();
-    else iTaskList.append(task);
+    iTaskList.append(task);
+    qDebug() << "Added task with id " << task->getType();
+    return true;
 }
 
-const Task* Actor::getTask(const QString &name)
+/**
+ * @brief Actor::getTask
+ * @param name
+ * @return
+ */
+const Task& Actor::getTask(const QString &name)
 {
     QListIterator<Task*> iterator(iTaskList);
+    Task* item;
 
     while(iterator.hasNext())
     {
-        Task* item = iterator.next();
+        item = iterator.next();
         if(item->getDescription() == name) {
             qDebug() << "Found task with \"" << name << "\"";
-            return item;
+            return *item;
         }
 
     }
-    return NULL;
+    return *item;
 }
 
+/**
+ * @brief Actor::getTaskCount
+ * @return
+ */
 int Actor::getTaskCount()
 {
     return iTaskList.size();
 }
 
-void Actor::addFunction(Function* function)
+/**
+ * @brief Actor::addFunction
+ * @param type
+ * @param description
+ * @return
+ */
+bool Actor::addFunction(const Function::functionType &type, const QString &description)
 {
-    if(searchFromFunctionList(function)) qDebug() << "Found existing function with id " << function->getType();
-    else iFunctionList.append(function);
+    if(!Utilities::isValidFunctionType(type)) return false;
+
+    Function* function = new Function(type,description);
+
+    if(searchFromFunctionList(function))
+    {
+        qDebug() << "Found existing function with id " << function->getType();
+        delete function;
+        return false;
+    }
+    qDebug() << "Added function with id " << function->getType();
+    iFunctionList.append(function);
+    return true;
 }
 
-const Function* Actor::getFunction(const QString &name)
+/**
+ * @brief Actor::getFunction
+ * @param name
+ * @return
+ */
+const Function& Actor::getFunction(const QString &name)
 {
     QListIterator<Function*> iterator(iFunctionList);
-
+    Function* item;
     while(iterator.hasNext())
     {
-        Function* item = iterator.next();
+        item = iterator.next();
         if(item->getDescription() == name) {
             qDebug() << "Found function with \"" << name << "\"";
-            return item;
+            return *item;
         }
 
     }
-    return NULL;
+    return *item;
 }
 
+/**
+ * @brief Actor::getFunctionCount
+ * @return
+ */
 int Actor::getFunctionCount()
 {
     return iFunctionList.size();
 }
 
+/**
+ * @brief Actor::connectToActor
+ * @param actor
+ * @param direction
+ * @param transferredInformation
+ * @return
+ */
 bool Actor::connectToActor(const Actor *actor, Connection::connectionType direction, QList<Information *> *transferredInformation)
 {
     if(!actor) return false;
     if(getId() == actor->getId()) return false;
     if(!Utilities::isValidConnectionType(direction)) return false;
 
-    Connection* conn;
-    if(transferredInformation) conn = new Connection(direction,getId(), actor->getId(),transferredInformation);
-    else conn = new Connection(direction,getId(),actor->getId());
+    Connection* conn = new Connection(direction,getId(), actor->getId(),transferredInformation);
 
     iConnectionList.append(conn);
 
