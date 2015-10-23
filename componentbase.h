@@ -8,11 +8,11 @@ class ComponentBase : public QObject
 {
     Q_OBJECT
 protected:
-    qint16 iId;
+    quint16 iId;
     QString iDescription;
 public:
     explicit ComponentBase(QObject *parent = 0);
-    qint16 getId() const;
+    quint16 getId() const;
 
     QString getDescription() const;
     void setDescription(const QString &value);

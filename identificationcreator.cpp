@@ -22,17 +22,17 @@ identificationCreator* identificationCreator::getInstance()
     return creator;
 }
 
-qint16 identificationCreator::getNextActorId()
+quint16 identificationCreator::getNextActorId()
 {
     return ++iActorIdPool;
 }
 
-qint16 identificationCreator::getNextConnectionId()
+quint16 identificationCreator::getNextConnectionId()
 {
     return ++iConnectionIdPool;
 }
 
-qint16 identificationCreator::getNextInformationId()
+quint16 identificationCreator::getNextInformationId()
 {
     return ++iInformationIdPool;
 }

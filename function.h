@@ -10,7 +10,7 @@ class Function : public ComponentBase
 {
     Q_OBJECT
 private:
-    QList<qint16> iInformationIdList;
+    QList<quint16> iInformationIdList;
     explicit Function(ComponentBase *parent = 0);
 public:
     // Types start from 1 in the generic functional model
@@ -34,7 +34,7 @@ public:
     QString getTypeString() const;
 
     bool addInformation(Information* information);
-    const QList<qint16>* getInformationList();
+    const QList<quint16>* getInformationList();
     bool hasInformation(Information* information);
 
 signals:

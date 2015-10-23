@@ -12,19 +12,19 @@ void Connection::setType(const connectionType &value)
     iType = value;
 }
 
-qint16 Connection::getStartConnection()
+quint16 Connection::getStartConnection()
 {
     return iActorStart;
 }
 
-qint16 Connection::getEndConnection()
+quint16 Connection::getEndConnection()
 {
     return iActorEnd;
 }
 
-qint16 *Connection::getConnectionEndpoints()
+quint16 *Connection::getConnectionEndpoints()
 {
-    qint16* endpoints = new qint16[2];
+    quint16* endpoints = new quint16[2];
     endpoints[0] = iActorStart;
     endpoints[1] = iActorEnd;
     return endpoints;
@@ -55,8 +55,8 @@ bool Connection::searchFromInformationList(Information *information)
 }
 
 Connection::Connection(const Connection::connectionType &value,
-                       const qint16 &start,
-                       const qint16 &end)
+                       const quint16 &start,
+                       const quint16 &end)
 {
     iId = identificationCreator::getInstance()->getNextConnectionId();
     iType = value;
@@ -64,7 +64,7 @@ Connection::Connection(const Connection::connectionType &value,
     iActorEnd = end;
 }
 
-Connection::Connection(const Connection::connectionType &value, const qint16 &start, const qint16 &end, QList<Information *> *informationList)
+Connection::Connection(const Connection::connectionType &value, const quint16 &start, const quint16 &end, QList<Information *> *informationList)
 {
     Connection(value,start,end);
     iInformationList = QList<Information*>(*informationList);

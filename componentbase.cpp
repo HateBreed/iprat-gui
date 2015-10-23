@@ -2,7 +2,7 @@
 #include "componentbase.h"
 #include "identificationcreator.h"
 
-qint16 ComponentBase::getId() const
+quint16 ComponentBase::getId() const
 {
     return iId;
 }

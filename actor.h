@@ -51,6 +51,7 @@ public:
 
     bool connectToActor(const Actor* actor, Connection::connectionType direction, QList<Information *> *transferredInformation);
 
+
 signals:
 
 public slots:

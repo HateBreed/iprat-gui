@@ -9,8 +9,8 @@ class Connection : public ComponentBase
 {
     Q_ENUMS(connectionType)
 private:
-    qint16 iActorStart;
-    qint16 iActorEnd;
+    quint16 iActorStart;
+    quint16 iActorEnd;
     QList<Information*> iInformationList; // Information transferred in this connection
     explicit Connection(ComponentBase *parent = 0);
     bool searchFromInformationList(Information* information);
@@ -22,15 +22,15 @@ public:
     };
     connectionType iType;
 
-    Connection(const connectionType &value, const qint16 &start, const qint16 &end);
-    Connection(const connectionType &value, const qint16 &start, const qint16 &end, QList<Information*> *informationList);
+    Connection(const connectionType &value, const quint16 &start, const quint16 &end);
+    Connection(const connectionType &value, const quint16 &start, const quint16 &end, QList<Information*> *informationList);
 
     connectionType getType();
     void setType(const connectionType &value);
 
-    qint16 getStartConnection();
-    qint16 getEndConnection();
-    qint16 *getConnectionEndpoints();
+    quint16 getStartConnection();
+    quint16 getEndConnection();
+    quint16 *getConnectionEndpoints();
 
     bool addInformation(Information* information);
 

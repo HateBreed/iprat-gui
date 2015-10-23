@@ -7,17 +7,17 @@
 #include "actor.h"
 #include "componentbase.h"
 
-qint16 randTask()
+quint16 randTask()
 {
-    qint16 id = 0;
+    quint16 id = 0;
     while(!Utilities::isValidTaskType((Task::taskType)id))
         id = qrand() % 10;
     return id;
 }
 
-qint16 randFunction()
+quint16 randFunction()
 {
-    qint16 id = 0;
+    quint16 id = 0;
     while(!Utilities::isValidFunctionType((Function::functionType)id))
         id = qrand() % 10;
     return id;

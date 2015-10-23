@@ -77,7 +77,7 @@ const Information* Actor::getInformation(const QString &name)
     return NULL;
 }
 
-const Information *Actor::getInformation(const qint16 &id)
+const Information *Actor::getInformation(const quint16 &id)
 {
     QListIterator<Information*> iterator(iInformationList);
 
