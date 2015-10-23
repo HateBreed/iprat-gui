@@ -8,7 +8,7 @@ Information::Information(ComponentBase *parent) :
 
 }
 
-informationType Information::getType() const
+Information::informationType Information::getType() const
 {
     return iType;
 }
@@ -18,7 +18,7 @@ void Information::setType(const informationType &value)
     iType = value;
 }
 
-informationIdentifiability Information::getIdentifiability() const
+Information::informationIdentifiability Information::getIdentifiability() const
 {
     return iIdentifiability;
 }

@@ -64,9 +64,10 @@ Actor::Actor(const QString &name,
     iFunctionList = QList<Function*>(_functions);
 }
 
-void Actor::addInformation(Information* information)
+bool Actor::addInformation(Information* information)
 {
     iInformationList.append(information);
+    return true;
 }
 
 const Information* Actor::getInformation(const QString &name)

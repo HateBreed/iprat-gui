@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QList>
 #include "componentbase.h"
+#include "calculationstate.h"
 #include "information.h"
 #include "connection.h"
 #include "task.h"
@@ -21,6 +22,7 @@ private:
 
     bool searchFromTaskList(const Task* task);
     bool searchFromFunctionList(const Function *function);
+    CalculationState state;
 
 public:
     ~Actor();
@@ -33,7 +35,7 @@ public:
           const QList<Function*> _functions);
 
 
-    void addInformation(Information* information);
+    bool addInformation(Information* information);
     const Information* getInformation(const QString &name);
     const Information* getInformation(const quint16 &id);
     int getInformationCount();
