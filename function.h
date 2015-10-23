@@ -25,7 +25,7 @@ public:
         ADMINISTRATION,
     };
 
-    Function(const QString &functionDescription, const functionType &value);
+    Function(const functionType &value, const QString &functionDescription);
 
     bool operator==(const Function &function);
 

@@ -28,7 +28,7 @@ Function::Function(ComponentBase *parent) :
 
 }
 
-Function::Function(const QString &functionDescription, const Function::functionType &value)
+Function::Function(const Function::functionType &value, const QString &functionDescription)
 {
     iDescription = QString(functionDescription);
 
