@@ -21,7 +21,9 @@ SOURCES += main.cpp\
     function.cpp \
     identificationcreator.cpp \
     componentbase.cpp \
-    utilities.cpp
+    utilities.cpp \
+    calculationmodel.cpp \
+    calculationstate.cpp
 
 HEADERS  += mainwindow.h \
     actor.h \
@@ -31,6 +33,8 @@ HEADERS  += mainwindow.h \
     function.h \
     identificationcreator.h \
     componentbase.h \
-    utilities.h
+    utilities.h \
+    calculationmodel.h \
+    calculationstate.h
 
 FORMS    += mainwindow.ui
