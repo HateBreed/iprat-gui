@@ -36,3 +36,8 @@ Function::Function(const QString &functionDescription, const Function::functionT
     //qDebug() << "Function Id = " << getType() << "\"" << getTypeString() << "\"";
 }
 
+bool Function::operator==(const Function &function)
+{
+    return this->getType() == function.getType();
+}
+

@@ -27,6 +27,8 @@ public:
 
     Function(const QString &functionDescription, const functionType &value);
 
+    bool operator==(const Function &function);
+
     Function::functionType getType() const;
 
     bool setType(const functionType &value);
