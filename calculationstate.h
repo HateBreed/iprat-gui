@@ -41,6 +41,7 @@ class CalculationState : public QObject
     Q_OBJECT
 public:
     explicit CalculationState(QObject *parent = 0);
+    CalculationState(QVector<quint8> &initialValues);
 
     quint8 getValue(const quint8 &position) const;
     bool setValue(const quint8 &position, const quint8 &value);
@@ -55,6 +56,8 @@ public:
 
 
 private:
+
+
     QVector<quint8> state; // all 18
     quint8 lastChangePosition;
     quint32 roundNumber;

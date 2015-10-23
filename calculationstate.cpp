@@ -1,12 +1,26 @@
+#include <assert.h>
 #include "calculationstate.h"
 
 CalculationState::CalculationState(QObject *parent) : QObject(parent)
 {
-   initialize();
+
+}
+
+CalculationState::CalculationState(QVector<quint8> &initialValues)
+{
+    initialize();
+
+    assert(initialValues.count() == ASSESSABLE);
+
+    for(int i = 0; i < ASSESSABLE; i++) {
+        quint8 rval = setValue(i,initialValues.at(i));
+        assert(rval == 1);
+    }
 }
 
 quint8 CalculationState::getValue(const quint8 &position) const
 {
+    assert(position < VALUES);
     switch(position)
     {
     case ATTACK_ACTUALIZATION:
@@ -97,6 +111,7 @@ void CalculationState::setLastChangePosition(const quint8 &value)
 
 void CalculationState::nextRound()
 {
+    //@TODO update history
     ++roundNumber;
 }
 

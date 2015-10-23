@@ -13,6 +13,8 @@ class CalculationModel : public QObject
     Q_OBJECT
 public:
     explicit CalculationModel(QObject *parent = 0);
+    void initializeState(CalculationState &state);
+    quint8 updateState(CalculationState &state);
     //quint8 (*calculation[VALUES]) (CalculationState &state);
 
 private:
@@ -39,9 +41,6 @@ private:
     quint8 calc_privacy_risk(CalculationState &state);
 
     void initialize_functions();
-    void initialize_state(CalculationState &state);
-
-    quint8 update_state(CalculationState &state);
     void update_state_history(CalculationState &state);
     int check_state_history_repetition(CalculationState &state);
 

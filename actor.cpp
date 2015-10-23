@@ -1,6 +1,7 @@
 #include <QDebug>
 #include "actor.h"
 #include "identificationcreator.h"
+#include "calculationmodel.h"
 #include "utilities.h"
 
 Actor::Actor(ComponentBase *parent) : ComponentBase(parent)
@@ -42,6 +43,14 @@ Actor::Actor(const QString &name)
 {
     iId = identificationCreator::getInstance()->getNextActorId();
     iDescription = QString(name);
+
+    QVector<quint8> values(ASSESSABLE,1);
+    CalculationModel model;
+    CalculationState state(values);
+
+    model.initializeState(state);
+
+    model.updateState(state);
 }
 
 Actor::Actor(const char *&name)

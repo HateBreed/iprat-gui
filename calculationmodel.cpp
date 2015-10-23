@@ -231,11 +231,12 @@ void CalculationModel::initialize_functions() {
 //    calculation[DATA_IDENTIFIABILITY] = calc_nothing;
 }
 
-void CalculationModel::initialize_state(CalculationState &state) {
+void CalculationModel::initializeState(CalculationState &state)
+{
     init_data_capabilitites(state);
 }
 
-quint8 CalculationModel::update_state(CalculationState &state) {
+quint8 CalculationModel::updateState(CalculationState &state) {
 
     quint8 update = 0;
 
