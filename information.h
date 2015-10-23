@@ -14,11 +14,17 @@ private:
     explicit Information(ComponentBase *parent = 0);
 
 public:
+    /**
+     * @brief The informationIdentifiability enum PII 2.0 definitions
+     */
     enum informationIdentifiability{
         identifiable,
         identified,
         nonidentifiable};
 
+    /**
+     * @brief The informationType enum Information types in abstract and functional models
+     */
     enum informationType{
         identification,
         raw,
@@ -35,6 +41,14 @@ public:
                 informationType &type,
                 informationIdentifiability &identifiability,
                 const int &multiplicity);
+
+    bool operator==(const Information &information);
+
+    informationIdentifiability getIdentifiability() const;
+    void setIdentifiability(const informationIdentifiability &value);
+
+    informationType getType() const;
+    void setType(const informationType &value);
 
 signals:
 
