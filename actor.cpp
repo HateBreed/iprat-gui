@@ -45,12 +45,11 @@ Actor::Actor(const QString &name)
     iDescription = QString(name);
 
     QVector<quint8> values(ASSESSABLE,3);
-    CalculationModel model;
     CalculationState state(values);
 
-    model.initializeState(state);
+    CalculationModel::initializeState(state);
 
-    model.calculateState(state);
+    CalculationModel::calculateState(state);
 }
 
 Actor::Actor(const char *&name)
