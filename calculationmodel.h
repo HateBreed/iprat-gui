@@ -16,7 +16,6 @@ public:
     void initializeState(CalculationState &state);
     void calculateState(CalculationState &state);
 
-    //quint8 (*calculation[VALUES]) (CalculationState &state);
 
 private:
     quint8 init_data_value(CalculationState &state);
@@ -41,7 +40,6 @@ private:
     quint8 calc_likelihood(CalculationState &state);
     quint8 calc_privacy_risk(CalculationState &state);
 
-    void initialize_functions();
     quint8 updateState(CalculationState &state);
 
 signals:

@@ -210,26 +210,6 @@ quint8 CalculationModel::calc_privacy_risk(CalculationState &state) {
 
 }
 
-void CalculationModel::initialize_functions() {
-//    calculation[DATA_VALUE] = calc_data_value;
-//    calculation[ASSET_VALUE] = calc_asset_value;
-//    calculation[DAMAGE_LEVEL] = calc_damage_level;
-//    calculation[ASSET_MISUSE_POTENTIAL] = calc_asset_misuse_potential;
-//    calculation[ATTACK_GAIN] = calc_attack_gain;
-//    calculation[ATTACK_ACTUALIZATION] = calc_attack_actualization;
-//    calculation[ASSET_ROLE] = calc_nothing;
-//    calculation[ASSET_ACCESS] = calc_nothing;
-//    calculation[PRIVACY_DAMAGE] = calc_privacy_damage;
-//    calculation[USER_DAMAGE] = calc_user_damage;
-//    calculation[DATA_CAPABILITIES] = calc_data_capabilities;
-//    calculation[DATA_STORAGE_TIME] = calc_nothing;
-//    calculation[DATA_QUANTITY] = calc_nothing;
-//    calculation[DATA_SIGNIFICANCE] = calc_nothing;
-//    calculation[DATA_ACCESS] = calc_nothing;
-//    calculation[IMPACT] = calc_impact;
-//    calculation[LIKELIHOOD] = calc_likelihood;
-//    calculation[DATA_IDENTIFIABILITY] = calc_nothing;
-}
 
 void CalculationModel::initializeState(CalculationState &state)
 {
