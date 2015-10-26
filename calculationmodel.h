@@ -12,12 +12,13 @@ class CalculationModel : public QObject
 {
     Q_OBJECT
 public:
-    explicit CalculationModel(QObject *parent = 0);
     static void initializeState(CalculationState &state);
     static void calculateState(CalculationState &state);
 
 
 private:
+    explicit CalculationModel(QObject *parent = 0);
+
     static quint8 init_data_value(CalculationState &state);
     static quint8 init_asset_value(CalculationState &state);
     static quint8 init_user_damage(CalculationState &state);
