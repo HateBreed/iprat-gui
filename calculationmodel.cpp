@@ -234,20 +234,25 @@ void CalculationModel::initialize_functions() {
 void CalculationModel::initializeState(CalculationState &state)
 {
     init_data_capabilitites(state);
+    state.initialize();
+}
+
+void CalculationModel::calculateState(CalculationState &state)
+{
+    qDebug() << "Calculating state" ;
+
+    quint8 rval = 0;
+    do {
+        rval = updateState(state);
+    } while(state.getChangeCount() > 0 && rval > 0);
 }
 
 quint8 CalculationModel::updateState(CalculationState &state) {
 
-    quint8 update = 0;
-
-    //
-    update_state_history(state);
-
-    //container->last_change_position = -1; // Update round start
-    //container->changes_on_this_round = 0; // Reset change counter
+    quint8 rval = 0;
 
     for(int i = 0; i < VALUES; i++) {
-        quint8 rval = 0;
+
         switch(i)
         {
         case ATTACK_ACTUALIZATION:
@@ -314,30 +319,7 @@ quint8 CalculationModel::updateState(CalculationState &state) {
         }
 
     }
+    qDebug() << "Updates on round" << state.getRound() << ":" << state.getChangeCount();
     state.nextRound();
-    return state.getChangeCount();
-}
-
-void CalculationModel::update_state_history(CalculationState &state) {
-
-//    for(int i = (container->round_number < HISTORY ? container->round_number : HISTORY-1); i > 0 ; i--) {
-//        memcpy(&(container->history[i][0]),&(container->history[i-1][0]),sizeof(quint8)*VALUES);
-//        container->last_change_position_history[i] = container->last_change_position_history[i-1];
-//    }
-
-//    // Add current to first
-//    memcpy(&(container->history[0][0]),&(container->state),sizeof(quint8)*VALUES);
-//    container->last_change_position_history[0] = container->last_change_position;
-}
-
-int CalculationModel::check_state_history_repetition(CalculationState &state) {
-
-//    // History is not full, cannot be repeated too much
-//    if(container->round_number < HISTORY) return 0;
-
-//    for(int i = 0; i < HISTORY; i++) {
-//        // If positions differ at any point -> no repetition
-//        if(container->last_change_position_history[i] != container->last_change_position) return 0;
-//    }
-//    return 1; // Repetition!
+    return rval;
 }

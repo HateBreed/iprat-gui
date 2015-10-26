@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <QDebug>
 #include "calculationstate.h"
 
 CalculationState::CalculationState(QObject *parent) : QObject(parent)
@@ -8,14 +9,26 @@ CalculationState::CalculationState(QObject *parent) : QObject(parent)
 
 CalculationState::CalculationState(QVector<quint8> &initialValues)
 {
-    initialize();
-
     assert(initialValues.count() == ASSESSABLE);
 
+    state = QVector<quint8>(VALUES,0);
+
+    history = QVector<QVector<quint8> >();
+
+    lastChangePositionInHistory = QVector<quint8>(HISTORY);
+
+    roundNumber = 0;
+    changeCount = 0;
+    lastChangePosition = -1;
+    historyPosition = 0;
+    isInitialized = false;
+
     for(int i = 0; i < ASSESSABLE; i++) {
-        quint8 rval = setValue(i,initialValues.at(i));
-        assert(rval == 1);
+        bool rval = setValue(i,initialValues.at(i));
+        assert(rval);
     }
+
+    printCurrentState();
 }
 
 quint8 CalculationState::getValue(const quint8 &position) const
@@ -88,13 +101,14 @@ bool CalculationState::setValue(const quint8 &position, const quint8 &value)
     // Value has changed?
     if(state.at(position) != value)
     {
+        qDebug() << "R:" << QString::number(getRound()) << "change of value @" << QString::number(position) << "from" << QString::number(state[position]) << "to" << QString::number(value);
         state[position] = value;
         if(roundNumber > 0) { // Not the initial round
             increaseChangeCount();
             setLastChangePosition(position);
         }
+        qDebug() << "changes total:" << QString::number(getChangeCount());
     }
-
 
     return true;
 }
@@ -112,6 +126,9 @@ void CalculationState::setLastChangePosition(const quint8 &value)
 void CalculationState::nextRound()
 {
     //@TODO update history
+    updateHistory();
+    changeCount = 0;
+    lastChangePosition = -1;
     ++roundNumber;
 }
 
@@ -125,6 +142,50 @@ quint8 CalculationState::getChangeCount() const
     return changeCount;
 }
 
+void CalculationState::printCurrentState() const
+{
+    QString printstring = "Values: ";
+    foreach(quint8 value, state)
+    {
+        printstring.append(QString::number(value) + ",");
+    }
+    qDebug() << "R: " << getRound() << printstring;
+}
+
+void CalculationState::printHistory() const
+{
+
+    foreach(QVector<quint8> vector, history)
+    {
+        QString printstring = "";
+        foreach(quint8 value, vector)
+        {
+            printstring.append(QString::number(value));
+            printstring.append(",");
+        }
+        if(vector.size() > 0) qDebug() << "History size=" << history.count() << "Values:" << printstring;
+    }
+
+}
+
+bool CalculationState::isStateInitialized() const
+{
+    return isInitialized;
+}
+
+void CalculationState::setStateInitialized()
+{
+    isInitialized = true;
+}
+
+void CalculationState::updateHistory()
+{
+    if(history.count() == HISTORY) history.pop_front();
+    history.push_back(QVector<quint8>(this->state));
+    qDebug() << "Updated history, size: " << history.count();
+    printHistory();
+}
+
 void CalculationState::increaseChangeCount()
 {
     ++changeCount;
@@ -132,21 +193,14 @@ void CalculationState::increaseChangeCount()
 
 void CalculationState::initialize()
 {
-    state = QVector<quint8>(VALUES,0);
-    lastChangePosition = 0;
-
-    history = QVector<QVector<quint8> >(HISTORY);
-    foreach (QVector<quint8> array, history)
+    if(!isStateInitialized())
     {
-        array.resize(VALUES);
-        foreach (quint8 value, array) value = 0;
+        setStateInitialized();
+        nextRound();
     }
-
-    lastChangePositionInHistory = QVector<quint8>(HISTORY);
-
-    roundNumber = 0;
-    changeCount = 0;
-    historyPosition = 0;
-
+    else
+    {
+        qDebug("CalculationState::initialize() alredy initialized");
+    }
 }
 

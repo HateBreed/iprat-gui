@@ -46,30 +46,37 @@ public:
     quint8 getValue(const quint8 &position) const;
     bool setValue(const quint8 &position, const quint8 &value);
 
-
     quint8 getLastChangePosition() const;
+
+    void initialize();
 
     void nextRound();
     quint32 getRound() const;
 
     quint8 getChangeCount() const;
 
+    void printCurrentState() const;
+    void printHistory() const;
+
 
 private:
 
 
     QVector<quint8> state; // all 18
-    quint8 lastChangePosition;
+    qint8 lastChangePosition;
     quint32 roundNumber;
     quint8 changeCount;
     QVector<QVector<quint8> > history; //[HISTORY][VALUES];
     quint8 historyPosition;
     QVector<quint8> lastChangePositionInHistory; //[HISTORY];
-
-    void initialize();
+    bool isInitialized;
 
     void increaseChangeCount();
     void setLastChangePosition(const quint8 &value);
+    void updateHistory();
+
+    bool isStateInitialized() const;
+    void setStateInitialized();
 
 signals:
 

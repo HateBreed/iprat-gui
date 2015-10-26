@@ -44,13 +44,13 @@ Actor::Actor(const QString &name)
     iId = identificationCreator::getInstance()->getNextActorId();
     iDescription = QString(name);
 
-    QVector<quint8> values(ASSESSABLE,1);
+    QVector<quint8> values(ASSESSABLE,3);
     CalculationModel model;
     CalculationState state(values);
 
     model.initializeState(state);
 
-    model.updateState(state);
+    model.calculateState(state);
 }
 
 Actor::Actor(const char *&name)
