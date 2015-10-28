@@ -22,6 +22,23 @@ QString Function::getTypeString() const
     return Utilities::transferFunctionTypeToString(getType());
 }
 
+bool Function::addInformation(Information *information)
+{
+    if(iInformationIdList.contains(information->getId())) return false;
+    iInformationIdList.append(information->getId());
+    return true;
+}
+
+const QList<quint16> *Function::getInformationList()
+{
+    return &iInformationIdList;
+}
+
+bool Function::hasInformation(Information *information)
+{
+    return(iInformationIdList.contains(information->getId()));
+}
+
 Function::Function(ComponentBase *parent) :
     ComponentBase(parent)
 {
