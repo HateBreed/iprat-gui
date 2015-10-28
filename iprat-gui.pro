@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     componentbase.cpp \
     utilities.cpp \
     calculationmodel.cpp \
-    calculationstate.cpp
+    calculationstate.cpp \
+    componentfactory.cpp
 
 HEADERS  += mainwindow.h \
     actor.h \
@@ -35,6 +36,7 @@ HEADERS  += mainwindow.h \
     componentbase.h \
     utilities.h \
     calculationmodel.h \
-    calculationstate.h
+    calculationstate.h \
+    componentfactory.h
 
 FORMS    += mainwindow.ui

@@ -29,10 +29,10 @@ public:
     Actor(const QString &name);
     Actor(const char* &name);
     Actor(const QString &name,
-          const QList<Information*> _informations,
-          const QList<Connection*> _connections,
-          const QList<Task*> _tasks,
-          const QList<Function*> _functions);
+          const QList<Information*> &informations,
+          const QList<Connection*> &connections,
+          const QList<Task*> &tasks,
+          const QList<Function*> &functions);
 
 
     bool addInformation(Information* information);

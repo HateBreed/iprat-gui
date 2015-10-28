@@ -6,6 +6,7 @@
 #include "utilities.h"
 #include "actor.h"
 #include "componentbase.h"
+#include "componentfactory.h"
 
 quint16 randTask()
 {
@@ -31,10 +32,11 @@ int main(int argc, char *argv[])
 
     QList<Actor*> actors;
     qsrand((uint)QTime::currentTime().msec());
+    ComponentFactory* factory = ComponentFactory::getInstance();
 
     for(int i = 0; i < 3; i++)
     {
-        Actor* actor = new Actor("test");
+        Actor* actor = factory->createActor("test");
         qDebug() << "Created actor" << actor->getId();
         for(int i = 0; i < 8 ; i++, actor->addTask((Task::taskType)randTask(),QString("")));
         for(int j = 0; j < 8 ; j++, actor->addFunction((Function::functionType)randFunction(),QString("Something")));

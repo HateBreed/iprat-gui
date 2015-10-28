@@ -3,6 +3,7 @@
 #include "identificationcreator.h"
 #include "calculationmodel.h"
 #include "utilities.h"
+#include "componentfactory.h"
 
 Actor::Actor(ComponentBase *parent) : ComponentBase(parent)
 {
@@ -59,17 +60,17 @@ Actor::Actor(const char *&name)
 }
 
 Actor::Actor(const QString &name,
-             const QList<Information*> _informations,
-             const QList<Connection*> _connections,
-             const QList<Task*> _tasks,
-             const QList<Function*> _functions)
+             const QList<Information*> &informations,
+             const QList<Connection*> &connections,
+             const QList<Task*> &tasks,
+             const QList<Function*> &functions)
 {
     iDescription = QString(name);
     iId = identificationCreator::getInstance()->getNextActorId();
-    iInformationList = QList<Information*>(_informations);
-    iConnectionList = QList<Connection*>(_connections);
-    iTaskList = QList<Task*>(_tasks);
-    iFunctionList = QList<Function*>(_functions);
+    iInformationList = QList<Information*>(informations);
+    iConnectionList = QList<Connection*>(connections);
+    iTaskList = QList<Task*>(tasks);
+    iFunctionList = QList<Function*>(functions);
 }
 
 bool Actor::addInformation(Information* information)
@@ -161,7 +162,7 @@ bool Actor::addTask(const Task::taskType &type, const QString &description)
 {
     if(!Utilities::isValidTaskType(type)) return false;
 
-    Task* task = new Task(type,description);
+    Task* task = ComponentFactory::getInstance()->createTask(type,description);
     if(searchFromTaskList(task))
     {
         qDebug() << "Found existing task with id " << task->getType();
@@ -215,7 +216,7 @@ bool Actor::addFunction(const Function::functionType &type, const QString &descr
 {
     if(!Utilities::isValidFunctionType(type)) return false;
 
-    Function* function = new Function(type,description);
+    Function* function = ComponentFactory::getInstance()->createFunction(type,description);
 
     if(searchFromFunctionList(function))
     {
@@ -271,7 +272,7 @@ bool Actor::connectToActor(const Actor *actor, Connection::connectionType direct
     if(getId() == actor->getId()) return false;
     if(!Utilities::isValidConnectionType(direction)) return false;
 
-    Connection* conn = new Connection(direction,getId(), actor->getId(),transferredInformation);
+    Connection* conn = ComponentFactory::getInstance()->createConnection(direction,getId(), actor->getId(),*transferredInformation);
 
     iConnectionList.append(conn);
 
