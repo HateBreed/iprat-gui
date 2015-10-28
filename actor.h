@@ -35,25 +35,27 @@ public:
           const QList<Function*> &functions);
 
 
-    bool addInformation(Information* information);
-    const Information* getInformation(const QString &name);
-    const Information* getInformation(const quint16 &id);
-    int getInformationCount();
+    Q_INVOKABLE bool addInformation(Information* information);
+    Q_INVOKABLE const Information* getInformation(const QString &name);
+    Q_INVOKABLE const Information* getInformation(const quint16 &id);
+    Q_INVOKABLE int getInformationCount();
 
-    const QList<quint16> getConnections(Connection::connectionType &type);
-    int getConnectionCount();
+    Q_INVOKABLE const QList<quint16> getConnections(Connection::connectionType &type);
+    Q_INVOKABLE int getConnectionCount();
 
-    bool addTask(const Task::taskType &type, const QString &description);
-    const Task &getTask(const QString &name);
-    int getTaskCount();
+    Q_INVOKABLE bool addTask(const Task::taskType &type, const QString &description);
+    Q_INVOKABLE const Task &getTask(const QString &name);
+    Q_INVOKABLE int getTaskCount();
 
-    bool addFunction(const Function::functionType &type, const QString &description);
-    const Function& getFunction(const QString &name);
-    int getFunctionCount();
+    Q_INVOKABLE bool addFunction(const Function::functionType &type, const QString &description);
+    Q_INVOKABLE const Function& getFunction(const QString &name);
+    Q_INVOKABLE int getFunctionCount();
 
-    bool connectToActor(const Actor* actor, Connection::connectionType direction);
-    bool connectToActor(const Actor* actor, Connection::connectionType direction, QList<Information *> *transferredInformation);
-    bool disconnectFromActor(const Actor* actor, quint16 connectionId);
+    Q_INVOKABLE bool connectToActor(const Actor* actor, Connection::connectionType direction);
+    Q_INVOKABLE bool connectToActor(const Actor* actor, Connection::connectionType direction, QList<Information *> *transferredInformation);
+    Q_INVOKABLE bool disconnectFromActor(const Actor* actor, quint16 connectionId);
+
+    Q_INVOKABLE void calculateRiskValue();
 
 signals:
 

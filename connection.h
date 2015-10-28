@@ -27,14 +27,14 @@ public:
 
     bool operator==(const Connection &connection);
 
-    connectionType getType();
-    void setType(const connectionType &value);
+    Q_INVOKABLE connectionType getType();
+    Q_INVOKABLE void setType(const connectionType &value);
 
-    quint16 getStartConnection();
-    quint16 getEndConnection();
-    quint16 *getConnectionEndpoints();
+    Q_INVOKABLE quint16 getStartConnection();
+    Q_INVOKABLE quint16 getEndConnection();
+    Q_INVOKABLE quint16 *getConnectionEndpoints();
 
-    bool addInformation(Information* information);
+    Q_INVOKABLE bool addInformation(Information* information);
 
 signals:
 

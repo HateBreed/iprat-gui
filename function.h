@@ -9,6 +9,7 @@
 class Function : public ComponentBase
 {
     Q_OBJECT
+    Q_ENUMS(functionType)
 private:
     QList<quint16> iInformationIdList;
     explicit Function(ComponentBase *parent = 0);
@@ -29,15 +30,15 @@ public:
 
     bool operator==(const Function &function);
 
-    Function::functionType getType() const;
+    Q_INVOKABLE Function::functionType getType() const;
 
-    bool setType(const functionType &value);
+    Q_INVOKABLE bool setType(const functionType &value);
 
-    QString getTypeString() const;
+    Q_INVOKABLE QString getTypeString() const;
 
-    bool addInformation(Information* information);
-    const QList<quint16>* getInformationList();
-    bool hasInformation(Information* information);
+    Q_INVOKABLE bool addInformation(Information* information);
+    Q_INVOKABLE const QList<quint16>* getInformationList();
+    Q_INVOKABLE bool hasInformation(Information* information);
 
 signals:
 

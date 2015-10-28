@@ -37,6 +37,16 @@ bool Task::addInformation(Information *information)
     return true;
 }
 
+const QList<Information*> *Task::getInformationList()
+{
+    return &iInformationList;
+}
+
+bool Task::hasInformation(Information *information)
+{
+    return searchFromList(information);
+}
+
 Task::Task(const Task::taskType &abstractType)
 {
     iId = abstractType;

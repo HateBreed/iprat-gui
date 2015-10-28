@@ -44,11 +44,11 @@ public:
 
     bool operator==(const Information &information);
 
-    informationIdentifiability getIdentifiability() const;
-    void setIdentifiability(const informationIdentifiability &value);
+    Q_INVOKABLE informationIdentifiability getIdentifiability() const;
+    Q_INVOKABLE void setIdentifiability(const informationIdentifiability &value);
 
-    informationType getType() const;
-    void setType(const informationType &value);
+    Q_INVOKABLE informationType getType() const;
+    Q_INVOKABLE void setType(const informationType &value);
 
 signals:
 

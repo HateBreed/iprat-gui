@@ -33,14 +33,16 @@ public:
 
     bool operator==(const Task &task);
 
-    int getMultiplicity() const;
-    void setMultiplicity(int &value);
+    Q_INVOKABLE int getMultiplicity() const;
+    Q_INVOKABLE void setMultiplicity(int &value);
 
-    taskType getType() const;
-    bool setType(const Task::taskType &abstractType);
-    QString getTypeString() const;
+    Q_INVOKABLE taskType getType() const;
+    Q_INVOKABLE bool setType(const Task::taskType &abstractType);
+    Q_INVOKABLE QString getTypeString() const;
 
-    bool addInformation(Information* information);
+    Q_INVOKABLE bool addInformation(Information* information);
+    Q_INVOKABLE const QList<Information *> *getInformationList();
+    Q_INVOKABLE bool hasInformation(Information* information);
 
 
 signals:
