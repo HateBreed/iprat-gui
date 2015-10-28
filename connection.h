@@ -30,8 +30,8 @@ public:
     Q_INVOKABLE connectionType getType();
     Q_INVOKABLE void setType(const connectionType &value);
 
-    Q_INVOKABLE quint16 getStartConnection();
-    Q_INVOKABLE quint16 getEndConnection();
+    Q_INVOKABLE const quint16& getStartConnection();
+    Q_INVOKABLE const quint16& getEndConnection();
     Q_INVOKABLE quint16 *getConnectionEndpoints();
 
     Q_INVOKABLE bool addInformation(Information* information);

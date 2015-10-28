@@ -12,12 +12,12 @@ void Connection::setType(const connectionType &value)
     iType = value;
 }
 
-quint16 Connection::getStartConnection()
+const quint16& Connection::getStartConnection()
 {
     return iActorStart;
 }
 
-quint16 Connection::getEndConnection()
+const quint16& Connection::getEndConnection()
 {
     return iActorEnd;
 }
